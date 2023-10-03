@@ -3,8 +3,16 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
+
+//multer
+const filePath = fileURLToPath(import.meta.url);
+const dirName = path.dirname(filePath);
+app.use(express.static(path.join(dirName, "uploads")));
+
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -23,7 +31,7 @@ mongoose.connect(url, {});
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-  console.log("***** MongoDB connected *****");
+  console.log("****** MongoDB connected ******");
   console.log("=================================");
 });
 
@@ -44,3 +52,9 @@ app.use("/nutrition", NutritionPlan);
 
 import UserSelectedNutritionPlan from "./Routes/UserSelectedNutritionPlan.js";
 app.use("/usnutition", UserSelectedNutritionPlan);
+
+import Admin from "./Routes/AdminRoutes.js";
+app.use("/admin", Admin);
+
+import Member from "./Routes/MemberRoutes.js";
+app.use("/member", Member);
