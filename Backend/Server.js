@@ -58,3 +58,6 @@ app.use("/admin", Admin);
 
 import Member from "./Routes/MemberRoutes.js";
 app.use("/member", Member);
+
+import Payment from "./Routes/paymentRoutes.js";
+app.use("/payment", Payment);

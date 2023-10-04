@@ -30,6 +30,14 @@ const MemberSchema = new Schema({
         type: String,
         required: true,  
     },
+    paymentStatus: {
+        type: String,
+        required: true,  
+    },
+    gymName: {
+        type: String,
+        required: true,  
+    },
     email: {
         type: String,
         required: true,

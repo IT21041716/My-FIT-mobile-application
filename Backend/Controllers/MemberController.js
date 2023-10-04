@@ -30,6 +30,8 @@ export const MemberSignup = async (req, res) => {
                 address: req.body.address,
                 height: req.body.height,
                 weight: req.body.weight,
+                gymName: req.body.gymName,
+                paymentStatus: "unpaid",
                 email: req.body.email,
                 password: HashPass
             })
@@ -81,6 +83,8 @@ export const MemberLogin = async (req, res) => {
                         address: registeredMember.address,
                         height: registeredMember.height,
                         weight: registeredMember.weight,
+                        gymName: registeredMember.gymName,
+                        paymentStatus: registeredMember.paymentStatus,
                         email: registeredMember.email,
                     }
                 })
@@ -128,3 +132,33 @@ export const tokenRefresh = (req, res, next) => {
         })
     }
 }
+
+// export const updatePaymentStatus = async (req, res) => {
+//     try {
+//         const id = req.body.memberId;
+//         const status = req.body.paymentStatus;
+
+//         const newData = {
+//             memberId: id,
+//             paymentStatus: status
+//         }
+
+//         const update = await member.findOneAndUpdate(id, newData, { new: true })
+//         if (update) {
+//             const newDetails = await member.findOne({ memberId: id });
+//             res.status(201).json({
+//                 message: "Status Updated..!",
+//                 payload: newDetails
+//             })
+//         } else {
+//             res.status(400).json({
+//                 message: "Status Update failed..!",
+//             })
+//         }
+//     } catch (error) {
+//         res.status(500).json({
+//             message: "Somthing went wrong..!",
+//             error: error
+//         })
+//     }
+// }

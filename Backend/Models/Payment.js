@@ -7,7 +7,7 @@ const PaymentSchema = new Schema({
         type: String,
         required: true,
     },
-    userId: {
+    memberId: {
         type: String,
         required: true,
     },
@@ -15,17 +15,25 @@ const PaymentSchema = new Schema({
         type: String,
         required: true,  
     },
-    dueDate: {
-        type: Date,
+    nextDate: {
+        type: String,
         required: true,  
     },
     lastDate: {
-        type: Date,
+        type: String,
         required: true,  
     },
     amount: {
         type: String,
         required: true,
+    },
+    rewards: {
+        type: String,
+        required: true,
+    },
+    gymName: {
+        type: String,
+        required: true,  
     },
    
 
