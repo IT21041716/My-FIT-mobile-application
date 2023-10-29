@@ -31,6 +31,7 @@ export const MemberSignup = async (req, res) => {
                 height: req.body.height,
                 weight: req.body.weight,
                 gymName: req.body.gymName,
+                rewards: 100,
                 paymentStatus: "unpaid",
                 email: req.body.email,
                 password: HashPass
@@ -38,6 +39,22 @@ export const MemberSignup = async (req, res) => {
 
             const newAccount = await newMember.save();
             if (newAccount) {
+                if (req.body.memberId) {
+                    const userData = await member.findOne({ memberId: req.body.memberId })
+                    const curentRewards = userData.rewards;
+                    const newRewards = curentRewards + 250
+
+                    const id = { memberId: req.body.memberId }
+                    const form = {
+                        rewards: newRewards
+                    }
+                    const updateRewards = await member.findOneAndUpdate(id, form, { new: true })
+                    if (updateRewards) {
+                        console.log("rewards success")
+                    } else {
+                        console.log("error")
+                    }
+                }
                 res.status(201).json({
                     message: 'Registration successfull..!',
                     payload: newAccount
@@ -67,8 +84,8 @@ export const MemberLogin = async (req, res) => {
 
             const chkPwd = await bcrypt.compare(enteredPwd, dbPwd);
             if (chkPwd) {
-                const token = jwt.sign({ email: req.body.email }, process.env.JWT_TOKEN_KEY1, { expiresIn: '10s' })
-                const refreshtoken = jwt.sign({ email: req.body.email }, process.env.REFRESH_TOKEN_KEY1, { expiresIn: '40s' })
+                const token = jwt.sign({ email: req.body.email }, process.env.JWT_TOKEN_KEY1, { expiresIn: '1h' })
+                const refreshtoken = jwt.sign({ email: req.body.email }, process.env.REFRESH_TOKEN_KEY1, { expiresIn: '3h' })
                 refreshtokens.push(refreshtoken);
 
                 res.status(201).json({
@@ -84,6 +101,7 @@ export const MemberLogin = async (req, res) => {
                         height: registeredMember.height,
                         weight: registeredMember.weight,
                         gymName: registeredMember.gymName,
+                        rewards: registeredMember.rewards,
                         paymentStatus: registeredMember.paymentStatus,
                         email: registeredMember.email,
                     }
@@ -94,7 +112,7 @@ export const MemberLogin = async (req, res) => {
                 })
             }
         } else {
-            res.status(401).json({
+            res.status(402).json({
                 message: 'No account found under this email..!'
             })
         }
@@ -133,13 +151,3 @@ export const tokenRefresh = (req, res, next) => {
     }
 }
 
-export const dueDateNotification = (req, res) => {
-    try {
-
-    } catch (error) {
-        res.status(500).json({
-            message: "Something went wrong..!",
-            error: error
-        })
-    }
-}

@@ -6,6 +6,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 
+
 const app = express();
 
 //multer
@@ -13,12 +14,13 @@ const filePath = fileURLToPath(import.meta.url);
 const dirName = path.dirname(filePath);
 app.use(express.static(path.join(dirName, "uploads")));
 
-
 app.use(bodyParser.json());
-app.use(cors());
 dotenv.config();
 
-const port = process.env.PORT || 8087;
+app.use(cors());
+
+
+const port = process.env.PORT || 8086;
 
 app.listen(port, () => {
   console.log("=================================");
@@ -31,7 +33,7 @@ mongoose.connect(url, {});
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-  console.log("****** MongoDB connected ******");
+  console.log("***** MongoDB connected *****");
   console.log("=================================");
 });
 
@@ -61,3 +63,6 @@ app.use("/member", Member);
 
 import Payment from "./Routes/paymentRoutes.js";
 app.use("/payment", Payment);
+
+import timetable from './Routes/timeTableRoutes.js';
+app.use("/timetable", timetable);

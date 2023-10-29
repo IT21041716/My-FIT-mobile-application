@@ -13,11 +13,13 @@ export const addUSPlan = async (req, res) => {
 
         const ususerID = req.body.ususerID;
         const usNPlanID = req.body.usNPlanID;
+        const type = req.body.type;
     
         const newMonth = new userSelectedNutritionPlan({
             usplanID: monthPlanId,
             ususerID: ususerID,
-            usNPlanID: usNPlanID
+            usNPlanID: usNPlanID,
+            type: type,
         });
     
         const newM = await newMonth.save();

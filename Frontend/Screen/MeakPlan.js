@@ -22,8 +22,11 @@ const MealPlan = () => {
   const route = useRoute();
   const itemId = route.params.data.payload;
   const navigation = useNavigation();
+  const [ususerID,setusUserID] = useState("651c69fd9a26a5742d859388");
+  const [type,setType] = useState("7 Days");
   //console.log(itemId.nutritionPlanId);
-  //console.log(itemId)
+  console.log(itemId.nutritionPlanId)
+  const usNPlanID = itemId.nutritionPlanId;
 
   useEffect(() => {
     axios
@@ -51,6 +54,20 @@ const MealPlan = () => {
 
   const handeleBack = () => {
     navigation.navigate('NutritionPlanSelect');
+  }
+
+  const moveUserAccount = () => {
+    const plan = {
+      ususerID,
+      usNPlanID,
+      type
+    }
+    axios.post('http://192.168.1.102:8086/usnutition/add',plan).then((res)=>{
+      console.log('plane selected')
+    }).catch((err)=>{
+      console.log("error in plan selecting")
+    })
+    navigation.navigate('MyMealPlan',{data:plan });
   }
 
   return (
@@ -90,27 +107,27 @@ const MealPlan = () => {
                 textAlign: "center",
                 paddingTop: 10,
                 fontSize: 18,
-                color: "white",
+                color: "black",
                 fontWeight: "bold",
               }}
             >
               Nutrition Package Details
             </Text>
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row', backgroundColor:'white', padding:10}}>
             <Text style={style.dayStyle}>Monday</Text>
             <View>
-              {plan && plan.monday && plan.monday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Monday && plan.Monday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.monday[1] == food._id || plan.monday[0] == food._id ? (
+                  {plan.Monday[1] == food._id || plan.Monday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodName}</Text>
                   ) : null}
                 </View>
               ))}
             </View>
             <View>
-              {plan && plan.monday && plan.monday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Monday && plan.Monday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.monday[1] == food._id || plan.monday[0] == food._id ? (
+                  {plan.Monday[1] == food._id || plan.Monday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodCalorie} g</Text>
                   ) : null}
                 </View>
@@ -118,21 +135,21 @@ const MealPlan = () => {
             </View>
             </View>
 
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row', padding:10}}>
             <Text style={style.dayStyle}>Tuesday</Text>
             <View>
-              {plan && plan.tuesday && plan.tuesday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Tuesday && plan.Tuesday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.tuesday[1] == food._id || plan.tuesday[0] == food._id ? (
+                  {plan.Tuesday[1] == food._id || plan.Tuesday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodName}</Text>
                   ) : null}
                 </View>
               ))}
             </View>
             <View>
-              {plan && plan.tuesday && plan.tuesday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Tuesday && plan.Tuesday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.tuesday[1] == food._id || plan.tuesday[0] == food._id ? (
+                  {plan.Tuesday[1] == food._id || plan.Tuesday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodCalorie} g</Text>
                   ) : null}
                 </View>
@@ -140,21 +157,21 @@ const MealPlan = () => {
             </View>
             </View>
 
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row', backgroundColor:'white', padding:10}}>
             <Text style={style.dayStyle}>Wednesday</Text>
             <View>
-              {plan && plan.wednesday && plan.wednesday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Wednesday && plan.Wednesday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.wednesday[1] == food._id || plan.wednesday[0] == food._id ? (
+                  {plan.Wednesday[1] == food._id || plan.Wednesday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodName}</Text>
                   ) : null}
                 </View>
               ))}
             </View>
             <View>
-              {plan && plan.wednesday && plan.wednesday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Wednesday && plan.Wednesday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.wednesday[1] == food._id || plan.wednesday[0] == food._id ? (
+                  {plan.Wednesday[1] == food._id || plan.Wednesday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodCalorie} g</Text>
                   ) : null}
                 </View>
@@ -162,21 +179,21 @@ const MealPlan = () => {
             </View>
             </View>
 
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row', padding:10}}>
             <Text style={style.dayStyle}>Thursday</Text>
             <View>
-              {plan && plan.thursday && plan.thursday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Thursday && plan.Thursday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.thursday[1] == food._id || plan.thursday[0] == food._id ? (
+                  {plan.Thursday[1] == food._id || plan.Thursday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodName}</Text>
                   ) : null}
                 </View>
               ))}
             </View>
             <View>
-              {plan && plan.thursday && plan.thursday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Thursday && plan.Thursday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.thursday[1] == food._id || plan.thursday[0] == food._id ? (
+                  {plan.Thursday[1] == food._id || plan.Thursday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodCalorie} g</Text>
                   ) : null}
                 </View>
@@ -184,42 +201,42 @@ const MealPlan = () => {
             </View>
             </View>
 
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row',backgroundColor:'white', padding:10}}>
             <Text style={style.dayStyle}>Friday</Text>
             <View>
-              {plan && plan.friday && plan.friday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Friday && plan.Friday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.friday[1] == food._id || plan.friday[0] == food._id ? (
+                  {plan.Friday[1] == food._id || plan.Friday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodName}</Text>
                   ) : null}
                 </View>
               ))}
             </View>
             <View>
-              {plan && plan.friday && plan.friday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Friday && plan.Friday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.friday[1] == food._id || plan.friday[0] == food._id ? (
+                  {plan.Friday[1] == food._id || plan.Friday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodCalorie} g</Text>
                   ) : null}
                 </View>
               ))}
             </View>
             </View>
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row', padding:10}}>
             <Text style={style.dayStyle}>Saturday</Text>
             <View>
-              {plan && plan.saturday && plan.saturday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Saturday && plan.Saturday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.saturday[1] == food._id || plan.saturday[0] == food._id ? (
+                  {plan.Saturday[1] == food._id || plan.Saturday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodName}</Text>
                   ) : null}
                 </View>
               ))}
             </View>
             <View>
-              {plan && plan.saturday && plan.saturday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Saturday && plan.Saturday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.saturday[1] == food._id || plan.saturday[0] == food._id ? (
+                  {plan.Saturday[1] == food._id || plan.Saturday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodCalorie} g</Text>
                   ) : null}
                 </View>
@@ -228,21 +245,21 @@ const MealPlan = () => {
             </View>
 
 
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row',backgroundColor:'white', padding:10}}>
             <Text style={style.dayStyle}>Sunday</Text>
             <View>
-              {plan && plan.sunday && plan.sunday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Sunday && plan.Sunday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.sunday[1] == food._id || plan.sunday[0] == food._id ? (
+                  {plan.Sunday[1] == food._id || plan.Sunday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodName}</Text>
                   ) : null}
                 </View>
               ))}
             </View>
             <View>
-              {plan && plan.sunday && plan.sunday.length > 0 && foods.map((food, index) => (
+              {plan && plan.Sunday && plan.Sunday.length > 0 && foods.map((food, index) => (
                 <View key={index} >
-                  {plan.sunday[1] == food._id || plan.sunday[0] == food._id ? (
+                  {plan.Sunday[1] == food._id || plan.Sunday[0] == food._id ? (
                     <Text style={style.nutriFood}>{food.foodCalorie} g</Text>
                   ) : null}
                 </View>
@@ -252,7 +269,7 @@ const MealPlan = () => {
           </ScrollView>
         </View>
         <View style={{width:100, marginLeft:150, paddingTop:20, borderRadius:20}}>
-        <Button title='Active' color={"orange"} onPress={()=>console.log('hi')} />
+        <Button title='Active' color={"orange"} onPress={()=>moveUserAccount()} />
         </View>
         
       </View>
@@ -301,7 +318,7 @@ const style = StyleSheet.create({
     width: 100,
     height: 30,
     color: "white",
-    marginLeft: 30,
+    marginLeft: 10,
     marginTop: 20,
     textAlign: "center",
     fontSize: 17,

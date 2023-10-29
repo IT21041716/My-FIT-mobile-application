@@ -17,7 +17,7 @@ export const sendMails = async (mail) => {
         })
 
         const mailData = {
-            from: '"myfit name" info@thaicoexport.com',
+            from: '"MY FIT GYM APPLICATION" info@thaicoexport.com',
             to: mail.to,
             subject: mail.subject,
             text: mail.body,

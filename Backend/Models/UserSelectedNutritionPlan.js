@@ -14,6 +14,10 @@ const userSelectedNutritionPlan = new Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model("userselectednutritionplan", userSelectedNutritionPlan);
