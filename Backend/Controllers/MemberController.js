@@ -133,32 +133,13 @@ export const tokenRefresh = (req, res, next) => {
     }
 }
 
-// export const updatePaymentStatus = async (req, res) => {
-//     try {
-//         const id = req.body.memberId;
-//         const status = req.body.paymentStatus;
+export const dueDateNotification = (req, res) => {
+    try {
 
-//         const newData = {
-//             memberId: id,
-//             paymentStatus: status
-//         }
-
-//         const update = await member.findOneAndUpdate(id, newData, { new: true })
-//         if (update) {
-//             const newDetails = await member.findOne({ memberId: id });
-//             res.status(201).json({
-//                 message: "Status Updated..!",
-//                 payload: newDetails
-//             })
-//         } else {
-//             res.status(400).json({
-//                 message: "Status Update failed..!",
-//             })
-//         }
-//     } catch (error) {
-//         res.status(500).json({
-//             message: "Somthing went wrong..!",
-//             error: error
-//         })
-//     }
-// }
+    } catch (error) {
+        res.status(500).json({
+            message: "Something went wrong..!",
+            error: error
+        })
+    }
+}
